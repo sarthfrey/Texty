@@ -3,28 +3,47 @@
 # Import the Flask Framework
 from flask import Flask, request
 import twilio.twiml
+import re
+
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
 # the App Engine WSGI application server.
  
 @app.route("/", methods=['GET', 'POST'])
-def hello_monkey():
-    """Respond to incoming calls with a simple text message."""
+def texty():
+	"""Respond to incoming calls with a simple text message."""
  
-    resp = twilio.twiml.Response()
-    resp.message("Hello, Mobile Monkey")
-    return str(resp)
+	#from_number = request.values.get('From', None)
+	from_body = request.values.get('Body', None)
+	body_string = str(from_body)
+	actual_content = re.split('\s*@',body_string)
 
-if __name__ == "__main__":
-    app.run(debug=True)
-    
+	message = "unchanged"
+	if len(actual_content) > 1:
+		if actual_content[1] == "translate":
+			message = "translate"
+		elif actual_content[1] == "currency":
+			message = "currency"
+		elif actual_content[1] == "temperature":
+			message = "temperature"
+		elif actual_content[1] == "stock":
+			message = "stock"
+		else:
+			message = "plah"
+	else:
+		message = "blah"
+
+	resp = twilio.twiml.Response()
+	resp.message(str(message))
+	return str(resp)
+
 @app.errorhandler(404)
 def page_not_found(e):
-    """Return a custom 404 error."""
-    return 'Sorry, Nothing at this URL.', 404
+	"""Return a custom 404 error."""
+	return 'Sorry, Nothing at this URL.', 404
 
 
 @app.errorhandler(500)
 def application_error(e):
-    """Return a custom 500 error."""
-    return 'Sorry, unexpected error: {}'.format(e), 500
+	"""Return a custom 500 error."""
+	return 'Sorry, unexpected error: {}'.format(e), 500
