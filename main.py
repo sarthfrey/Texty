@@ -7,8 +7,8 @@ app = Flask(__name__)
 # the App Engine WSGI application server.
 
 
-@app.route('/')
-def hello():
+@app.route('/', methods=['GET', 'POST'])
+def texty():
     """Return a friendly HTTP greeting."""
     from_number = request.values.get('From', None)
     from_body = request.values.get('Body', None)
