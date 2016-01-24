@@ -31,3 +31,4 @@ def getConversionRate(base_country, new_country):
 #Returns -1 if input is invalid
 #This case returns the # CAD dollars per USD
 #print getConversionRate('USD','CAD')
+#print getConversionRate('USD','CNY')

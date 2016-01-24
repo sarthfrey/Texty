@@ -28,4 +28,4 @@ def getWeather(city):
     output = "Temperature is " + str(celsius) + " C in " + city + ". " + description + "."
     return output
     
-#print getWeather("Toronto")
+#print getWeather("Waterloo")

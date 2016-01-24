@@ -16,6 +16,7 @@ def getJSON(url):
     
 def getExchangeRate(country_code):
     data = getJSON("http://api.fixer.io/latest")
+    print data
     if country_code not in data['rates']:
         return -1
     rate = data['rates'][country_code]
@@ -30,4 +31,4 @@ def getConversionRate(base_country, new_country):
 
 #Returns -1 if input is invalid
 #This case returns the # CAD dollars per USD
-#print getConversionRate('USD','CAD')
+#print getConversionRate('USD','CNY')

@@ -18,6 +18,7 @@ def getJSON(city):
     fhand = urllib.urlopen(url)
     line = [line for line in fhand]
     data = json.loads(line[0])
+    print data
     return data
     
 def getWeather(city):
@@ -28,4 +29,4 @@ def getWeather(city):
     output = "Temperature is " + str(celsius) + " C in " + city + ". " + description + "."
     return output
     
-#print getWeather("Toronto")
+#print getWeather("Waterloo")

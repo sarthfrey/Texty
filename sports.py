@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan 23 01:32:40 2016
+Created on Sat Jan 23 17:02:19 2016
 
 @author: prcobol
 """
@@ -12,7 +12,7 @@ def getJSON(url):
     fhand = urllib.urlopen(url)
     line = [line for line in fhand]
     print line
-    data = json.loads(line)
+    data = json.loads(line[0])
     return data
-
-print getJSON("https://www.quandl.com/api/v3/datasets/SEC/AAPL_SALESREVENUENET_Q.json&api_key=PyTmLZ-bT44EashsCs6P")
+    
+print getJSON("http://api.espn.com/v1/sports/baseball/mlb/events")
