@@ -4,6 +4,7 @@
 from flask import Flask, request
 import twilio.twiml
 import re
+import currency, weather
 
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
@@ -23,9 +24,12 @@ def texty():
 		if actual_content[1] == "translate":
 			message = "translate"
 		elif actual_content[1] == "currency":
-			message = "currency"
+			conversion_rate = currency.getConversionRate(actual_content[2], actual_content[3])
+			converted_amount = float(conversion_rate) * float(actual_content[4])
+			message = format(converted_amount, '.2f')
 		elif actual_content[1] == "temperature":
-			message = "temperature"
+			city = re.split(',\s*',actual_content[3])
+			message = weather.getWeather(city[0])
 		elif actual_content[1] == "stock":
 			message = "stock"
 		else:
