@@ -25,7 +25,8 @@ def texty():
 			lang_from = actual_content[2]
 			lang_to = actual_content[3]
 			text = actual_content[4]
-			message = translate.getTranslation(lang_from, lang_to, text)
+			message = translate.filler(lang_from, lang_to, text)
+			#message = lang_from + " " + lang_to + " " + text
 		elif actual_content[1] == "currency":
 			conversion_rate = currency.getConversionRate(actual_content[2], actual_content[3])
 			converted_amount = float(conversion_rate) * float(actual_content[4])
@@ -54,3 +55,6 @@ def page_not_found(e):
 def application_error(e):
 	"""Return a custom 500 error."""
 	return 'Sorry, unexpected error: {}'.format(e), 500
+
+if __name__ == "__main__":
+    app.run()

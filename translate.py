@@ -22,6 +22,5 @@ def getTranslation(source,target,text):
     translation = data['data']['translations'][0]['translatedText']
     return translation
 
-
-#print getTranslation("fr","en","je suis un bon person")
-    
+def filler(lang_from, lang_to, text):
+	return getTranslation(lang_from, lang_to, text)
