@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jan 23 01:32:40 2016
+Created on Sun Jan 24 00:52:05 2016
 
 @author: prcobol
 """
@@ -8,18 +8,18 @@ Created on Sat Jan 23 01:32:40 2016
 import urllib
 import json
 
-def getJSON(url):
-    fhand = urllib.urlopen(url)
-    line = [line for line in fhand]
-    print line
-<<<<<<< HEAD
-    data = json.loads(line[0])
+def buildURL(ticker):
+    return "https://www.quandl.com/api/v3/datasets/WIKI/" + ticker + ".json"
+
+def getJSON(ticker):
+    url = buildURL(ticker)
+    response = urllib.urlopen(url)
+    data = json.load(response)
     return data
 
-print getJSON("http://dev.markitondemand.com/MODApis/Api/v2/AAPL")
-=======
-    data = json.loads(line)
-    return data
+def getQuote(ticker):
+    data = getJSON(ticker)
+    return data['dataset']['data'][0][4]
+    
 
-print getJSON("https://www.quandl.com/api/v3/datasets/SEC/AAPL_SALESREVENUENET_Q.json&api_key=PyTmLZ-bT44EashsCs6P")
->>>>>>> 89508c263927188f544c455e2910062be3090d0c
+#print getQuote("FB")
