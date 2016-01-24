@@ -22,5 +22,6 @@ def getTranslation(target,text):
     translation = data['data']['translations'][0]['translatedText']
     return translation
 
-#print getTranslation("fr","pennapps is awesome")
+
+#print getTranslation("en","je suis un bon person")
     
