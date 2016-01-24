@@ -21,4 +21,3 @@ def getTranslation(source,target,text):
     translation = data['data']['translations'][0]['translatedText']
     return translation
 
-    
