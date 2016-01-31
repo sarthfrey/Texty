@@ -4,7 +4,7 @@
 from flask import Flask, request
 import twilio.twiml
 import re
-import currency, weather, translate
+import currency, weather, translate, stocks, dictionaryDef, timezone, thesaurus
 
 app = Flask(__name__)
 # Note: We don't need to call run() since our application is embedded within
@@ -31,15 +31,23 @@ def texty():
 			conversion_rate = currency.getConversionRate(actual_content[2], actual_content[3])
 			converted_amount = float(conversion_rate) * float(actual_content[4])
 			message = format(converted_amount, '.2f')
-		elif actual_content[1] == "temperature":
+		elif actual_content[1] == "weather" or actual_content[1] == "temperature":
 			city = re.split(',\s*',actual_content[3])
 			message = weather.getWeather(city[0])
 		elif actual_content[1] == "stock":
-			message = "stock"
+			message = stocks.getQuote(actual_content[2])
+		elif actual_content[1] == "define":
+			message = dictionaryDef.getDefinition(actual_content[2])
+		elif actual_content[1] == "time":
+			message = timezone.getTime(actual_content[2])
+		elif actual_content[1] == "thesaurus":
+			message = thesaurus.getSynonyms(actual_content[2])
+		elif actual_content[1] == "help":
+			message = "Available commands:\n\n@currency @(convert-from) @(convert-to) @(amount)\n\n@weather @(city)\n\n@stock @(stock ticker)\n\n@define @(word)\n\n@time @(city)"
 		else:
-			message = "plah"
+			message = "Please type in @help for a list of commands!"
 	else:
-		message = "blah"
+		message = "Please type in @help for a list of commands!"
 
 	resp = twilio.twiml.Response()
 	resp.message(str(message))
