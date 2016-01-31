@@ -1,5 +1,7 @@
 ## Python Flask Skeleton for Google App Engine
 
+The mobile app is available at https://github.com/tylerjxzhang/Texty-Android
+
 A skeleton for building Python applications on Google App Engine with the
 [Flask micro framework](http://flask.pocoo.org).
 
