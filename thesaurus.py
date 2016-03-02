@@ -23,6 +23,7 @@ def getXML(word):
 	return data
 
 def getSynonyms(word):
+	
 	data = getXML(word)
 	itemlist = data.getElementsByTagName('syn')
 	if len(itemlist) == 0:

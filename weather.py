@@ -20,11 +20,14 @@ def getJSON(city):
     data = json.loads(line[0])
     return data
     
-def getWeather(city):
+def getWeather(units, city):
     data = getJSON(city)
     city = data['name']
     celsius = data['main']['temp'] - 273.15
+    fahrenheit = celsius * 1.8 + 32
     description = data['weather'][0]['description']
+    if(units == "fahrenheit"):
+        return "Temperature is " + str(fahrenheit) + " F in " + city + ". " + description + "."
     output = "Temperature is " + str(celsius) + " C in " + city + ". " + description + "."
     return output
     
